@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18'
-        }
-    }
+    agent any
 
     stages {
 
@@ -27,7 +23,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'npm start &'
+                sh 'nohup npm start &'
             }
         }
     }
