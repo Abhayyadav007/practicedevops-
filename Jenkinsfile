@@ -1,13 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18'
+        }
+    }
 
     stages {
-
-        stage('Clone Repository') {
-            steps {
-                echo 'Cloning repository...'
-            }
-        }
 
         stage('Install Dependencies') {
             steps {
@@ -29,10 +27,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh '''
-                    pkill node || true
-                    nohup npm start &
-                '''
+                sh 'npm start &'
             }
         }
     }
